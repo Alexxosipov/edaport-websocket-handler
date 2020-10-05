@@ -23,6 +23,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageMinPlugin = require('imagemin-webpack-plugin').default;
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 let targetServerConfiguration = serverConfiguration.internal;
 
@@ -44,6 +45,10 @@ const config = function(env, args) {
         {
           test: /\.scss$/,
           use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+        },
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
         },
         {
           test: /\.js$/,
@@ -127,7 +132,13 @@ const config = function(env, args) {
           },
         ],
       }),
+      new VueLoaderPlugin(),
     ],
+    resolve: {
+      alias: {
+        vue: 'vue/dist/vue.js',
+      },
+    },
   };
 };
 

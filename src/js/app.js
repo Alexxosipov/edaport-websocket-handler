@@ -1,3 +1,10 @@
 import '../scss/app.scss';
 
-// Your JS Code goes here
+import Vue from 'vue';
+import Main from './components/Main.vue';
+
+new Vue({
+  el: '#app',
+  components: { Main },
+  template: '<Main/>',
+});
